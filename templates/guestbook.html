@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Gästebuch{% endblock title %}
+
+{% block page_content %}
+    <h1>Gästebuch</h1>
+
+    <form method="post">
+        <p> Wenn es Ihnen bei uns gut gefallen hat, freuen wir uns über einen Eintrag in unserem Gästebuch: </p>
+
+            <p> Vor- und Nachname: <input type="text" name="name"></p>
+            <p> E-Mail: <input type="email" name="email"></p>
+            <p> Ihr Eintrag: <textarea name="message" rows="10" cols="80" placeholder="Schreiben Sie bitte nur nettes" required></textarea> </p>
+
+        <button type="submit">Abschicken</button>
+    </form>
+
+    <br>
+
+
+
+<h3>Einträge</h3>
+<p> Lesen Sie hier, was andere Gäste über den Aufenthalt bei uns berichten: </p>
+
+{% for message in messages %}
+    <p>
+        <strong><a href="mailto:{{message.email}}">{{ message.author_name }}</a></strong>:
+        <br>
+        <em>{{ message.message_text }}</em>
+    </p>
+    <br>
+{% else %}
+    <p>Keine Einträge</p>
+{% endfor %}
+
+{% endblock page_content %}
